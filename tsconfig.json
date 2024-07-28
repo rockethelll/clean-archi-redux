@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Alias */
+    "paths": {
+      "@trainingsapp/domain/*": ["src/domain/*"],
+      "@trainingsapp/di/*": ["src/di/*"],
+      "@trainingsapp/infrastructure/*": ["src/infrastructure/*"],
+      "@trainingsapp/utils/*": ["src/utils/*"],
+      "@trainingsapp/store": ["src/store/store.ts"],
+      "@trainingsapp/components/*": ["src/userinterface/components/*"],
+      "@trainingsapp/pages/*": ["src/userinterface/pages/*"]
+    }
+  },
+  "include": ["src"]
+}
