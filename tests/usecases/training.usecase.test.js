@@ -1,6 +1,6 @@
 import { describe, test } from '@jest/globals';
 
-describe('Test of training usecases', () => {
+describe('Tests of training usecases', () => {
   test('', () => {
     return;
   });

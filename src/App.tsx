@@ -1,12 +1,11 @@
 import {
-  createBrowserRouter,
   Navigate,
   RouterProvider,
+  createBrowserRouter,
 } from 'react-router-dom';
-
-import DashboardPage from './userinterface/pages/dashboard/Dashboard';
-import TrainingConfigurationPage from './userinterface/pages/production/configuration/Configuration';
-import TrainingPresentationPage from './userinterface/pages/production/presentation/Presentation';
+import DashboardPage from '@trainingsapp/pages/dashboard/Dashboard';
+import TrainingConfigurationPage from '@trainingsapp/pages/production/configuration/Configuration';
+import TrainingPresentationPage from '@trainingsapp/pages/production/presentation/Presentation';
 
 function App() {
   const router = createBrowserRouter([
@@ -22,12 +21,8 @@ function App() {
     },
     { path: '*', element: <Navigate to='/' replace /> },
   ]);
-  return (
-    <RouterProvider
-      router={router}
-      fallbackElement={<DashboardPage />}
-    ></RouterProvider>
-  );
+
+  return <RouterProvider router={router} fallbackElement={<DashboardPage />} />;
 }
 
 export default App;

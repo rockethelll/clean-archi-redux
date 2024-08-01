@@ -15,7 +15,7 @@ export function TrainingCardViewModel() {
   const handleMouseLeaveCard = () => {
     setColorTitleCard(COLOR_TITLE_CARD);
     setBgTitleCard(BG_TITLE_CARD);
-  }
+  };
 
   return {
     colorTitleCard,

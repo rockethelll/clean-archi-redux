@@ -1,9 +1,9 @@
-const TrainingPresentationPage = () => {
+export const TrainingPresentationPage = () => {
   return (
     <div>
-      <h1>Presentation page</h1>
+      <h1>TrainingPresentationPage Page</h1>
     </div>
-  );
-};
+  )
+}
 
 export default TrainingPresentationPage;

@@ -1,24 +1,54 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-node_modules
-dist
-dist-ssr
-*.local
+# compiled output
+/dist
+/dist-ssr
+/tmp
+/out-tsc
+.next
 
-# Editor directories and files
-.vscode/*
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 !.vscode/extensions.json
-.idea
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# ESLint
+.eslintcache
+
+# NX environments - https://nx.dev/guides/environment-variables
+.local.env
+.env.local
+
+# Yarn
+.yarn
+
+# Storybook
+build-storybook.log

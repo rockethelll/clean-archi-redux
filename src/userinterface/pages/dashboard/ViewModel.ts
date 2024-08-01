@@ -1,7 +1,7 @@
+import { useEffect } from 'react';
+import { useDispatch } from '@trainingsapp/store';
 import { getTrainingsUC } from '@trainingsapp/domain/usecases/trainings.usecase';
 import { TrainingPresenter } from '@trainingsapp/infrastructure/presenters/trainings.presenter';
-import { useDispatch } from '@trainingsapp/store';
-import { useEffect } from 'react';
 
 export function DashboardViewModel() {
   const dispatch = useDispatch();
@@ -9,7 +9,10 @@ export function DashboardViewModel() {
 
   useEffect(() => {
     dispatch(getTrainingsUC());
-  }, [dispatch]);
+  }, []);
 
-  return { trainings, isLoading };
+  return {
+    trainings,
+    isLoading,
+  };
 }

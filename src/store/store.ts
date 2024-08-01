@@ -1,12 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
 import {
   EqualityFn,
   useDispatch as useDispatchBase,
   useSelector as useSelectorBase,
 } from 'react-redux';
-
-import { trainingReducer } from '../domain/usecases/training.usecase';
-import { trainingsReducer } from '../domain/usecases/trainings.usecase';
+import { configureStore } from '@reduxjs/toolkit';
+import { trainingReducer } from '@trainingsapp/domain/usecases/training.usecase';
+import { trainingsReducer } from '@trainingsapp/domain/usecases/trainings.usecase';
 
 export const reducer = {
   training: trainingReducer,
@@ -16,7 +15,9 @@ export const reducer = {
 export const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

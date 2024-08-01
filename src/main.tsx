@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './store/store.ts';
+import { store } from '@trainingsapp/store';
 import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from './utils/ui-theme/theme.ts';
+import { theme } from '@trainingsapp/utils/ui-theme/theme';
+import { handlers } from '@trainingsapp/infrastructure/inMemory/server';
+import { setupWorker } from 'msw/browser';
+import App from './App.tsx';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ChakraProvider>
-  </React.StrictMode>,
-);
+const app = async () => {
+  const worker = setupWorker(...handlers);
+  await worker.start({ onUnhandledRequest: 'bypass' });
+
+  return createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <ChakraProvider theme={theme}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ChakraProvider>
+    </StrictMode>,
+  );
+};
+
+app();

@@ -1,5 +1,4 @@
-import { Box, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
-import DI from '@trainingsapp/di/ioc';
+import { Box, Flex, Image, HStack, Text, VStack } from '@chakra-ui/react';
 import type { Training } from '@trainingsapp/domain/models/training.interface';
 import {
   GroupConnectedIcon,
@@ -7,6 +6,7 @@ import {
   VideoCallIcon,
 } from '@trainingsapp/utils/ui-icons';
 import { HiOutlinePuzzle } from 'react-icons/hi';
+import DI from '@trainingsapp/di/ioc';
 
 interface TrainingCardProps {
   training: Training;
@@ -33,11 +33,12 @@ const modalityIcons = [
 
 const TrainingCard = ({ training }: TrainingCardProps) => {
   const {
-    bgTitleCard,
     colorTitleCard,
+    bgTitleCard,
     handleMouseEnterCard,
     handleMouseLeaveCard,
   } = DI.resolve('TrainingCardViewModel');
+
   return (
     <Box>
       <Flex

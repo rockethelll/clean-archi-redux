@@ -8,26 +8,11 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'simple-import-sort'],
+  plugins: ['react-refresh'],
   rules: {
-    'react/prop-types': 'off',
-    'react-refresh/only-export-components': 'off',
-    'react/no-unescaped-entities': 'off',
-    'no-unused-vars': 'off',
-    'simple-import-sort/imports': [
-      'error',
-      {
-        groups: [
-          // External packages come first
-          ['^@?\\w'],
-          // Internal files
-          ['^@/'],
-          // Colocated files
-          ['^\\.\\./', '^\\./'],
-          // Style imports
-          ['^.+\\.?(css)$'],
-        ],
-      },
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
     ],
   },
 };

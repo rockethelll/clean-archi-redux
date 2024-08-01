@@ -1,6 +1,6 @@
+import { factory, primaryKey } from '@mswjs/data';
 import { faker } from '@faker-js/faker';
 import { Modality } from '@trainingsapp/domain/models/training.interface';
-
 import thumbnail1 from './assets/photo-1542393545-10f5cde2c810.webp';
 import thumbnail2 from './assets/photo-1525547719571-a2d4ac8945e2.avif';
 import thumbnail3 from './assets/photo-1541701494587-cb58502866ab.avif';
@@ -38,8 +38,21 @@ const generateModalities = () =>
       ],
   ) as Modality[];
 
-const trainings = () =>
-  [...new Array(TRAININGS_COUNT)].map((_, index) => ({
+export const db = factory({
+  training: {
+    id: primaryKey(String),
+    title: String,
+    description: String,
+    createdAt: String,
+    thumbnail: {
+      url: String,
+    },
+    modalities: Array,
+  },
+});
+
+const generateTrainings = (index: number) => {
+  return {
     id: ids[index],
     title: titles[index],
     description: faker.lorem.paragraph(3),
@@ -48,6 +61,9 @@ const trainings = () =>
       url: thumbnails[index],
     },
     modalities: [...new Set(generateModalities())],
-  }));
+  };
+};
 
-export const trainingFakeData = trainings();
+export const trainingsFakeData = [...new Array(TRAININGS_COUNT)].map(
+  (_, index) => db.training.create(generateTrainings(index)),
+);

@@ -4,7 +4,7 @@ const trainingSlice = createSlice({
   name: 'training',
   initialState: {},
   reducers: {},
-  extraReducers() {}
+  extraReducers() {},
 });
 
 export const trainingReducer = trainingSlice.reducer;

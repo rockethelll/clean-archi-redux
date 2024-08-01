@@ -1,10 +1,11 @@
 import {
+  createSlice,
   createAsyncThunk,
   createSelector,
-  createSlice,
 } from '@reduxjs/toolkit';
+import type { RootState } from '@trainingsapp/store';
 import type { TrainingsState } from '@trainingsapp/domain/models/trainings.interface';
-import { trainingFakeData } from '@trainingsapp/infrastructure/inMemory/training.db';
+import TrainingsRepository from '@trainingsapp/infrastructure/repositories/trainings.repository';
 
 const initialState: TrainingsState = {
   data: [],
@@ -20,10 +21,11 @@ const trainingsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getTrainingsUC.pending, (state) => {
+      .addCase(getTrainingsUC.pending, (state, _) => {
         state.isLoading = true;
       })
       .addCase(getTrainingsUC.fulfilled, (state, action) => {
+        state.errors.getTrainingsErrorMessage = '';
         state.data = action.payload;
         state.isLoading = false;
       })
@@ -34,11 +36,29 @@ const trainingsSlice = createSlice({
   },
 });
 
+const preventMutlipleCalls = {
+  condition: (_: void, { getState }: { getState: RootState }) => {
+    const { isLoading } = getState().trainings;
+    if (isLoading) {
+      return false;
+    }
+  },
+};
+
 export const getTrainingsUC = createAsyncThunk(
   'api/getTrainingsUC',
-  async () => {
-    return trainingFakeData;
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data: trainings } = await TrainingsRepository().getTrainings();
+
+      return trainings;
+    } catch (e) {
+      const error = e as Error;
+      console.error('Erreur lors du getTrainingUC: ' + error.message);
+      return rejectWithValue(error);
+    }
   },
+  preventMutlipleCalls,
 );
 
 export const selectTrainingsState = (state: { trainings: TrainingsState }) =>

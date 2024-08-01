@@ -1,10 +1,10 @@
-import { Container, Grid, Heading } from '@chakra-ui/react';
+import { Container, Grid, Heading, Spinner, Flex } from '@chakra-ui/react';
 import TrainingCard from '@trainingsapp/components/TrainingCard/TrainingCard';
-import DI from '@trainingsapp/di/ioc';
 import type { Training } from '@trainingsapp/domain/models/training.interface';
+import DI from '@trainingsapp/di/ioc';
 
 export const DashboardPage = () => {
-  const { trainings } = DI.resolve('DashboardViewModel');
+  const { trainings, isLoading } = DI.resolve('DashboardViewModel');
 
   return (
     <>
@@ -27,6 +27,17 @@ export const DashboardPage = () => {
         >
           Formations
         </Heading>
+
+        {isLoading && (
+          <Flex
+            paddingTop='40px'
+            minHeight='35rem'
+            alignItems='center'
+            justifyContent='center'
+          >
+            <Spinner color='white' size='xl' />
+          </Flex>
+        )}
 
         <Grid
           templateColumns='repeat(auto-fill, 28.1rem)'
